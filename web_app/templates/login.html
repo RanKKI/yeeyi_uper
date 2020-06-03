@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css">
+</head>
+<body>
+
+{% macro render_form_with_layout(form) -%}
+
+{%- endmacro %}
+
+<div class="modal is-active" id="newModal">
+  <div class="modal-background"></div>
+  <div class="modal-content box">
+    <form method="POST" action="{{ url_for('views.login') }}">
+      {{ form.csrf_token() }}
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">
+            {{ form.password.label }}
+          </label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              {{ form.password(class_='input') }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <label class="label">
+          </label>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <button class="button" type="submit">Login</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <button class="modal-close is-large" aria-label="close" onclick="switchmodal()"></button>
+</div>
+
+</body>
+</html>

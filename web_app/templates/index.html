@@ -1,0 +1,120 @@
+{% set no_label=["SubmitField"] %}
+
+{% macro render_form(form) -%}
+  {% if form.type == "SubmitField" %}
+    {{ form(class_='button is-primary') }}
+  {% elif form.type == "SelectField" %}
+    <div class="select">
+      {{ form() }}
+    </div>
+  {% elif form.type=="TextAreaField" %}
+    {{ form(class_="textarea") }}
+  {% elif form.type=="BooleanField" %}
+    {{ form() }}
+  {% else %}
+    {{ form(class_='input') }}
+  {% endif %}
+{%- endmacro %}
+
+{% macro render_form_with_layout(form) -%}
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">
+        {% if form.type not in no_label %}
+          {{ form.label }}
+        {% endif %}
+      </label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <div class="control">
+          {{ render_form(form) }}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endmacro %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yeeyi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+<div class="modal" id="newModal">
+  <div class="modal-background"></div>
+  <div class="modal-content box">
+    <form method="POST" action="{{ url_for('views.index') }}">
+      {{ form.csrf_token() }}
+      {{ render_form_with_layout(form.username) }}
+      {{ render_form_with_layout(form.password) }}
+      {{ render_form_with_layout(form.tid) }}
+      {{ render_form_with_layout(form.start) }}
+      {{ render_form_with_layout(form.end) }}
+      {{ render_form_with_layout(form.sub) }}
+    </form>
+  </div>
+  <button class="modal-close is-large" aria-label="close" onclick="switchmodal()"></button>
+</div>
+<div class="container">
+
+  <div class="columns">
+    <div class="column is-3">
+      <div class="box">
+        <button class="button is-primary is-fullwidth" onclick="switchmodal()">New</button>
+        <script>
+            function switchmodal() {
+                $("#newModal").toggleClass("is-active");
+            }
+        </script>
+        <ul>
+          {% if data %}
+            {% for d in data %}
+              <li>
+                <a href="{{ url_for('views.index',tid=d.tid) }}">
+                  {{ d.tid }}
+                </a>
+              </li>
+            {% endfor %}
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+    <div class="column">
+      <div class="box">
+        {% if current %}
+          <div class="level">
+            <div class="level-left">
+              <a href="http://www.yeeyi.com/bbs/forum.php?mod=viewthread&tid={{ current.tid }}">{{ current.tid }}</a>
+            </div>
+            <div class="level-right">
+              <a class="button is-warning" href="{{ url_for("views.delete",tid=current.tid) }}">Delete</a>
+            </div>
+          </div>
+          <table class="table is-fullwidth">
+            <thead>
+            <tr>
+              <th width="30%">Time</th>
+              <th>Msg</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for l in log %}
+              <tr>
+                <th>{{ l.time }}</th>
+                <th>{{ l.msg }}</th>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
