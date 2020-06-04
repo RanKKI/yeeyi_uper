@@ -1,7 +1,8 @@
-from flask import Blueprint, request, render_template, redirect, url_for
+from web_app import lm
 from web_app.database import Record, Log, u
 from web_app.forms import NewForm, LoginForm
-from web_app import lm
+
+from flask import Blueprint, request, render_template, redirect, url_for
 from flask_login import login_required, login_user
 
 views = Blueprint("views", __name__)

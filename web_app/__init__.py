@@ -16,7 +16,7 @@ def create_app(config):
     lm.init_app(app)
     lm.login_view = "views.login"
 
-    from app.views import views
+    from web_app.views import views
     app.register_blueprint(views)
 
     if not os.path.exists(config.DATABASE_PATH):

@@ -23,7 +23,6 @@ class Yeeyi(object):
     def __init__(self, record: Record):
         self.session = requests.session()
         self.record = record
-        self.perpare()
 
     def perpare(self):
         self.session.headers = {
@@ -39,12 +38,13 @@ class Yeeyi(object):
         }
 
     def up(self):
-        tid = self.record.tid
-        now = datetime.now()
         if not self.record.cookies or self.record.count >= 8:
             self.record.count = 0
             self.login()
-            self.perpare()
+        self.perpare()
+
+        now = datetime.now()
+        tid = self.record.tid
         try:
             time_left = self.__up()
             next_time = None
@@ -64,15 +64,18 @@ class Yeeyi(object):
             self.record.count = 8
 
         if not next_time:
-            try:
-                interval = ((self.record.end - now.hour) * 60 - now.minute) / time_left
-            except (ValueError, ZeroDivisionError):
-                interval = 60
-            self.record.interval = abs(interval)
-            next_time = (now + timedelta(minutes=abs(interval))).strftime("%H:%M")
+            self.record.interval = self.get_interval(time_left)
+            next_time = (now + timedelta(minutes=self.record.interval)).strftime("%H:%M")
 
         self.record.time = next_time
         self.record.save()
+
+    def get_interval(self, time_left):
+        now = datetime.now()
+        try:
+            return abs(((self.record.end - now.hour) * 60 - now.minute) / time_left)
+        except (ValueError, ZeroDivisionError):
+            return 60
 
     def __up(self):
         r = self.record

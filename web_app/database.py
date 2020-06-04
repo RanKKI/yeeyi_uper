@@ -23,6 +23,9 @@ class Record(db.Model):
     time = db.Column(db.String(10))
     interval = db.Column(db.Integer)
 
+    content = db.Column(db.Text)
+    is_repost = db.Column(db.Boolean, default=False)
+
     @classmethod
     def new(cls, form: NewForm):
         data = {
@@ -31,6 +34,8 @@ class Record(db.Model):
             "tid": form.tid.data,
             "start": max(form.start.data, 0),
             "end": min(form.end.data, 24),
+            "content": form.content.data,
+            "is_repost": form.repost.data,
         }
         if data["end"] < data["start"]:
             data["start"], data["end"] = 9, 21
@@ -81,7 +86,7 @@ class Log(db.Model):
 
     @staticmethod
     def get(tid: int):
-        return Log.query.filter_by(tid=tid).order_by(Log.id).Desc.limit(20).all()
+        return Log.query.filter_by(tid=tid).order_by(Log.id.desc()).limit(20).all()
 
 
 class U(UserMixin):

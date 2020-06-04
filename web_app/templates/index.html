@@ -75,7 +75,7 @@
           {% if data %}
             {% for d in data %}
               <li>
-                <a href="{{ url_for('views.index',tid=d.tid) }}">
+                <a href="/view/{{ d.tid }}">
                   {{ d.tid }}
                 </a>
               </li>
@@ -92,7 +92,7 @@
               <a href="http://www.yeeyi.com/bbs/forum.php?mod=viewthread&tid={{ current.tid }}">{{ current.tid }}</a>
             </div>
             <div class="level-right">
-              <a class="button is-warning" href="{{ url_for("views.delete",tid=current.tid) }}">Delete</a>
+              <a class="button is-warning" href="{{ url_for('views.delete', tid=current.tid) }}">Delete</a>
             </div>
           </div>
           <table class="table is-fullwidth">
