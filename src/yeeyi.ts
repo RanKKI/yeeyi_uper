@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { HttpsProxyAgent } from 'https-proxy-agent';
 
 export async function login(username: string, password: string): Promise<string> {
     return new Promise((resolve, reject) => {
@@ -9,7 +8,6 @@ export async function login(username: string, password: string): Promise<string>
                 password: password
             },
             {
-                httpsAgent: agent,
                 headers: {
                     "host": "www.yeeyi.com",
                     'authority': 'www.yeeyi.com',
