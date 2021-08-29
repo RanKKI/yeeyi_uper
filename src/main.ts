@@ -55,7 +55,7 @@ class Upper {
                 this.check()
             } catch (err) {
                 if (err) {
-                    Logger.error(err.message || err)
+                    Logger.error(err)
                 }
             }
         }
@@ -94,7 +94,7 @@ class Upper {
                 db.write(this.data)
             } catch (err) {
                 if (err) {
-                    Logger.error(`failed to write ${err.message || err}`)
+                    Logger.error(`failed to write ${err}`)
                 }
             }
         }
