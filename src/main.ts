@@ -55,7 +55,7 @@ class Upper {
                 this.check()
             } catch (err) {
                 if (err) {
-                    Logger.error(err)
+                    Logger.error(`check with error ${err}`)
                 }
             }
         }
