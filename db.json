@@ -1,0 +1,14 @@
+{
+    "start": 9,
+    "end": 19,
+    "checkInterval": 60,
+    "posts": [
+        {
+            "tid": 4412680,
+            "username": "墨尔本City电脑",
+            "password": "yU19820903",
+            "token": "3fcb6dfa0307f4bdu/TXc8FkII5i+7fr1SMxvYVBed17GT2fXSt7Oxdkca3i8BnwJf72P44olLJZrAO1lwHP+Ucc+aGakBbLH4ul6gDFFVrrSeOR+rWYQKqTACMLWGwCLe+ZjRfdOvnzOzS7mn3RNLyVabF3igRi9iqjs6buzpyT5OxlP7TKdu6Obqs3jSe8VQHc1CQcEwLP2g53ebl94eUnA/jWmIeo6sA9jXo02n9B75X9RcYQ",
+            "timestamp": 1630227532745
+        }
+    ]
+}

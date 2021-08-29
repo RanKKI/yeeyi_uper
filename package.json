@@ -1,0 +1,22 @@
+{
+  "name": "yeeyi_uper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsc && node dist/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RanKKI/yeeyi_uper.git"
+  },
+  "author": "RanKKI",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^16.7.5",
+    "axios": "^0.21.1",
+    "colors": "^1.4.0",
+    "https-proxy-agent": "^5.0.0"
+  }
+}
