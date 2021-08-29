@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
-const agent = new HttpsProxyAgent('http://127.0.0.1:7890');
-
 export async function login(username: string, password: string): Promise<string> {
     return new Promise((resolve, reject) => {
         axios.post('https://www.yeeyi.com/api/login/',
@@ -46,7 +44,6 @@ export function up(postID: number, token: string): Promise<{ times: number, mess
                 authcode: token
             },
             {
-                httpsAgent: agent,
                 headers: {
                     "host": "www.yeeyi.com",
                     'authority': 'www.yeeyi.com',
