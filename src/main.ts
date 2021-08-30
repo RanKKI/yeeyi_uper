@@ -125,7 +125,7 @@ class Upper {
             const diff = (this.data.end - curHour) * 60 * 1000
             if (ret.times == null) {
                 date.setDate(date.getDate() + 1)
-                date.setHours(this.data.start)
+                date.setHours(this.data.start, 0)
                 post.timestamp = date.getTime()
                 Logger.log(`post ${post.tid} 0 times left, next call ${getNowString(post.timestamp)}`)
                 return
