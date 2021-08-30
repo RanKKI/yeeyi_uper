@@ -119,7 +119,6 @@ class Upper {
         }
         try {
             const ret = await yeeyi.up(post.tid, post.token)
-            console.log(ret)
             const date = new Date(now)
             const curHour = date.getHours()
             const diff = (this.data.end - curHour) * 60 * 1000
@@ -130,7 +129,7 @@ class Upper {
                 Logger.log(`post ${post.tid} 0 times left, next call ${getNowString(post.timestamp)}`)
                 return
             }
-            post.timestamp = now + diff / ret.times + (getRandomInt(-5, 5) * 60 * 1000) // 正负 5 分钟的偏差
+            post.timestamp = now + (diff / ret.times) + (getRandomInt(-5, 5) * 60 * 1000) // 正负 5 分钟的偏差
             Logger.log(`post ${post.tid} ${ret.message}, next call ${getNowString(post.timestamp)}`)
         } catch (err) {
             post.token = ""
