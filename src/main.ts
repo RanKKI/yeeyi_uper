@@ -119,11 +119,15 @@ class Upper {
         }
         try {
             const ret = await yeeyi.up(post.tid, post.token)
-            const curHour = new Date(now).getHours()
+            console.log(ret)
+            const date = new Date(now)
+            const curHour = date.getHours()
             const diff = (this.data.end - curHour) * 60 * 1000
-            if (ret.times == 0) {
-                post.timestamp = now + 60 * 60 * 1000
-                Logger.log(`post ${post.tid} ${ret.message}, next call ${getNowString(post.timestamp)}`)
+            if (ret.times == null) {
+                date.setDate(date.getDate() + 1)
+                date.setHours(this.data.start)
+                post.timestamp = date.getTime()
+                Logger.log(`post ${post.tid} 0 times left, next call ${getNowString(post.timestamp)}`)
                 return
             }
             post.timestamp = now + diff / ret.times + (getRandomInt(-5, 5) * 60 * 1000) // 正负 5 分钟的偏差
