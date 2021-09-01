@@ -120,7 +120,7 @@ class Upper {
         try {
             const ret = await yeeyi.up(post.tid, post.token)
             const date = new Date(now)
-            if (ret.times == null) {
+            if (ret.times == null || ret.times == 0) {
                 date.setDate(date.getDate() + 1)
                 date.setHours(this.data.start, 0)
                 post.timestamp = date.getTime()
