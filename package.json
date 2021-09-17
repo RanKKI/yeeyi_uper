@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^16.7.5",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "colors": "^1.4.0",
     "https-proxy-agent": "^5.0.0"
   }
