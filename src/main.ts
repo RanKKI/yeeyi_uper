@@ -119,6 +119,9 @@ class Upper {
         }
         try {
             const ret = await yeeyi.up(post.tid, post.token)
+            if (ret.status != 0) {
+                throw ret.message
+            }
             const date = new Date(now)
             if (ret.times == null || ret.times == 0) {
                 date.setDate(date.getDate() + 1)

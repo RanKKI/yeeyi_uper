@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 export async function login(username: string, password: string): Promise<string> {
     return new Promise((resolve, reject) => {
         axios.post('https://www.yeeyi.com/api/login/',
@@ -34,12 +33,13 @@ export async function login(username: string, password: string): Promise<string>
     })
 }
 
-export function up(postID: number, token: string): Promise<{ times: number, message: string}> {
+export function up(postID: number, token: string): Promise<{ times: number, message: string, status: number }> {
     return new Promise((resolve, reject) => {
         axios.post('https://www.yeeyi.com/api/upVote/',
             {
                 tid: postID,
-                authcode: token
+                authcode: token,
+                devid: "6def75e-b4f5-24bc-6724-43cb13e4dd3c|pc"
             },
             {
                 headers: {
